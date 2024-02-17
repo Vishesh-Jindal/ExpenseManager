@@ -84,7 +84,7 @@ public class UserController {
     public ResponseEntity<Double> getNetSavingsByYear(@PathVariable("id") int userId, @PathVariable("year") int year){
         log.info("Request Received to fetch net savings by year for user:"+userId+" year:"+year);
         try{
-            Double savings = incomeService.getNetIncomeByYear(userId, year) - incomeService.getNetIncomeByYear(userId, year);
+            Double savings = incomeService.getNetIncomeByYear(userId, year) - expenseService.getNetExpensesByYear(userId, year);
             return ResponseEntity.status(HttpStatus.OK).body(savings);
         }catch (NotFoundException notFoundException){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
