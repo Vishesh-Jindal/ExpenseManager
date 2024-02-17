@@ -61,7 +61,7 @@ public class ExpenseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/user/{userId}/{year}")
+    @GetMapping("/user/{userId}/year/{year}")
     public ResponseEntity<Double> getNetExpensesByYear(@PathVariable("userId") int userId, @PathVariable("year") int year){
         log.info("Request Received to fetch net expense by year for user:"+userId+" year:"+year);
         try{
@@ -73,7 +73,7 @@ public class ExpenseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/user/{userId}/{month}")
+    @GetMapping("/user/{userId}/month/{month}")
     public ResponseEntity<Double> getNetExpensesByMonth(@PathVariable("userId") int userId, @PathVariable("month") int month){
         log.info("Request Received to fetch net expense by month for user:"+userId+" month:"+month);
         try{

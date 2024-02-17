@@ -80,7 +80,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/{id}/savings/{year}")
+    @GetMapping("/{id}/savings/year/{year}")
     public ResponseEntity<Double> getNetSavingsByYear(@PathVariable("id") int userId, @PathVariable("year") int year){
         log.info("Request Received to fetch net savings by year for user:"+userId+" year:"+year);
         try{
@@ -92,7 +92,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/{id}/savings/{month}")
+    @GetMapping("/{id}/savings/month/{month}")
     public ResponseEntity<Double> getNetSavingsByMonth(@PathVariable("id") int userId, @PathVariable("month") int month){
         log.info("Request Received to fetch net savings by month for user:"+userId+" month:"+month);
         try{
