@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Entity
 @Table(name = "expense")
@@ -27,6 +28,9 @@ public class Expense {
     @JsonIgnore
     User user;
 
+    public Expense(){
+        date = LocalDate.now(ZoneId.of("Asia/Kolkata"));
+    }
     public int getId() {
         return id;
     }

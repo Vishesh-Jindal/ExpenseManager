@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Entity
 @Table(name = "income")
@@ -29,6 +30,10 @@ public class Income {
     @Enumerated(EnumType.STRING)
     @Column(name = "incomeType")
     IncomeType incomeType;
+
+    public Income(){
+        date = LocalDate.now(ZoneId.of("Asia/Kolkata"));
+    }
 
     public int getId() {
         return id;
