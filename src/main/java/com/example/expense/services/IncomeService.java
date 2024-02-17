@@ -30,7 +30,7 @@ public class IncomeService {
     }
     @Transactional
     public double getNetIncomeByMonth(int userId, int month){
-        return incomeDao.getTotalIncomeInYear(userId, month);
+        return incomeDao.getTotalIncomeInMonth(userId, month);
     }
     @Transactional
     public double getNetIncome(int userId){
