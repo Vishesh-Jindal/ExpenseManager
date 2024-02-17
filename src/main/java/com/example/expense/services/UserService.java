@@ -16,11 +16,15 @@ public class UserService {
         return userDao.addUser(user);
     }
     @Transactional
-    public User updateUser(String userId, User user){
+    public User getUser(int userId){
+        return userDao.getUser(userId);
+    }
+    @Transactional
+    public User updateUser(int userId, User user){
         return userDao.updateUser(userId, user);
     }
     @Transactional
-    public void deleteUser(String userId){
+    public void deleteUser(int userId){
         userDao.deleteUser(userId);
     }
 

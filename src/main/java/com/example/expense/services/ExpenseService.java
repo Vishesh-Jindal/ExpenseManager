@@ -12,15 +12,15 @@ public class ExpenseService {
     @Autowired
     ExpenseDao expenseDao;
     @Transactional
-    public Expense addExpense(String userId, Expense expense){
+    public Expense addExpense(int userId, Expense expense){
         return expenseDao.addExpense(userId, expense);
     }
     @Transactional
-    public Expense updateExpense(String expenseId, Expense expense){
+    public Expense updateExpense(int expenseId, Expense expense){
         return expenseDao.updateExpense(expenseId, expense);
     }
     @Transactional
-    public void deleteExpense(String expenseId){
+    public void deleteExpense(int expenseId){
         expenseDao.deleteExpense(expenseId);
     }
 }

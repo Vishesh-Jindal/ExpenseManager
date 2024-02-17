@@ -12,15 +12,15 @@ public class IncomeService {
     @Autowired
     IncomeDao incomeDao;
     @Transactional
-    public Income addIncome(String userId, Income income){
+    public Income addIncome(int userId, Income income){
         return incomeDao.addIncome(userId, income);
     }
     @Transactional
-    public Income updateIncome(String incomeId, Income income){
+    public Income updateIncome(int incomeId, Income income){
         return incomeDao.updateIncome(incomeId, income);
     }
     @Transactional
-    public void deleteIncome(String incomeId){
+    public void deleteIncome(int incomeId){
         incomeDao.deleteIncome(incomeId);
     }
 }
