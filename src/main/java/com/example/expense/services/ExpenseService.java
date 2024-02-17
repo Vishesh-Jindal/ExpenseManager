@@ -30,7 +30,7 @@ public class ExpenseService {
     }
     @Transactional
     public double getNetExpensesByMonth(int userId, int month){
-        return expenseDao.getTotalExpenseInYear(userId, month);
+        return expenseDao.getTotalExpenseInMonth(userId, month);
     }
     @Transactional
     public double getNetExpenses(int userId){
