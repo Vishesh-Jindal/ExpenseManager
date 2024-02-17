@@ -27,7 +27,9 @@ public class Expense {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     User user;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "expenseType")
+    ExpenseType expenseType;
     public Expense(){
         date = LocalDate.now(ZoneId.of("Asia/Kolkata"));
     }
@@ -78,8 +80,4 @@ public class Expense {
     public void setExpenseType(ExpenseType expenseType) {
         this.expenseType = expenseType;
     }
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "expenseType")
-    ExpenseType expenseType;
 }
