@@ -24,4 +24,16 @@ public class ExpenseService {
     public void deleteExpense(int expenseId) throws NotFoundException {
         expenseDao.deleteExpense(expenseId);
     }
+    @Transactional
+    public double getNetExpensesByYear(int userId, int year){
+        return expenseDao.getTotalExpenseInYear(userId, year);
+    }
+    @Transactional
+    public double getNetExpensesByMonth(int userId, int month){
+        return expenseDao.getTotalExpenseInYear(userId, month);
+    }
+    @Transactional
+    public double getNetExpenses(int userId){
+        return expenseDao.getTotalExpense(userId);
+    }
 }

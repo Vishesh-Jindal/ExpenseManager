@@ -24,4 +24,16 @@ public class IncomeService {
     public void deleteIncome(int incomeId) throws NotFoundException {
         incomeDao.deleteIncome(incomeId);
     }
+    @Transactional
+    public double getNetIncomeByYear(int userId, int year){
+        return incomeDao.getTotalIncomeInYear(userId, year);
+    }
+    @Transactional
+    public double getNetIncomeByMonth(int userId, int month){
+        return incomeDao.getTotalIncomeInYear(userId, month);
+    }
+    @Transactional
+    public double getNetIncome(int userId){
+        return incomeDao.getTotalIncome(userId);
+    }
 }
