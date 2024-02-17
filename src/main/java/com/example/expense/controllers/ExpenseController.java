@@ -62,7 +62,7 @@ public class ExpenseController {
         }
     }
     @GetMapping("/user/{userId}/{year}")
-    public ResponseEntity<Double> getNetExpensesByYear(@PathVariable("id") int userId, @PathVariable("year") int year){
+    public ResponseEntity<Double> getNetExpensesByYear(@PathVariable("userId") int userId, @PathVariable("year") int year){
         log.info("Request Received to fetch net expense by year for user:"+userId+" year:"+year);
         try{
             Double expense = expenseService.getNetExpensesByYear(userId, year);
@@ -74,7 +74,7 @@ public class ExpenseController {
         }
     }
     @GetMapping("/user/{userId}/{month}")
-    public ResponseEntity<Double> getNetExpensesByMonth(@PathVariable("id") int userId, @PathVariable("month") int month){
+    public ResponseEntity<Double> getNetExpensesByMonth(@PathVariable("userId") int userId, @PathVariable("month") int month){
         log.info("Request Received to fetch net expense by month for user:"+userId+" month:"+month);
         try{
             Double expense = expenseService.getNetExpensesByMonth(userId, month);
@@ -86,7 +86,7 @@ public class ExpenseController {
         }
     }
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Double> getNetExpenses(@PathVariable("id") int userId){
+    public ResponseEntity<Double> getNetExpenses(@PathVariable("userId") int userId){
         log.info("Request Received to fetch net expense till now for user:"+userId);
         try{
             Double expense = expenseService.getNetExpenses(userId);
