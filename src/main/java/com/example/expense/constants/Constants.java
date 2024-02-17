@@ -2,6 +2,6 @@ package com.example.expense.constants;
 
 public class Constants {
     public class QueryConstants {
-        public final static String FETCH_BY_USERNAME = "FROM User WHERE User.username= :value";
+        public final static String FETCH_BY_USERNAME = "FROM User WHERE username=:value";
     }
 }
