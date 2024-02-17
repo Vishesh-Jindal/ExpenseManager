@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/income")
 @Slf4j
@@ -17,7 +19,7 @@ public class IncomeController {
     @Autowired
     IncomeService incomeService;
     @PostMapping("/user/{userId}")
-    public ResponseEntity<Income> addIncome(@PathVariable("userId") int userId, @RequestBody Income income, BindingResult bindingResult){
+    public ResponseEntity<Income> addIncome(@PathVariable("userId") int userId, @RequestBody @Valid Income income, BindingResult bindingResult){
         log.info("Request Received to add income for user:"+userId);
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -32,7 +34,7 @@ public class IncomeController {
         }
     }
     @PutMapping("/{incomeId}")
-    public ResponseEntity<Income> updateIncome(@PathVariable("incomeId") int incomeId, @RequestBody Income income, BindingResult bindingResult){
+    public ResponseEntity<Income> updateIncome(@PathVariable("incomeId") int incomeId, @RequestBody @Valid Income income, BindingResult bindingResult){
         log.info("Request Received to update income:"+incomeId);
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

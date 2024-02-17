@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/expense")
 @Slf4j
@@ -18,7 +20,7 @@ public class ExpenseController {
     ExpenseService expenseService;
 
     @PostMapping("/user/{userId}")
-    public ResponseEntity<Expense> addExpense(@PathVariable("userId") int userId, @RequestBody Expense expense, BindingResult bindingResult){
+    public ResponseEntity<Expense> addExpense(@PathVariable("userId") int userId, @RequestBody @Valid Expense expense, BindingResult bindingResult){
         log.info("Request Received to add expense for user:"+userId);
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -33,7 +35,7 @@ public class ExpenseController {
         }
     }
     @PutMapping("/{expenseId}")
-    public ResponseEntity<Expense> updateExpense(@PathVariable("expenseId") int expenseId, @RequestBody Expense expense, BindingResult bindingResult){
+    public ResponseEntity<Expense> updateExpense(@PathVariable("expenseId") int expenseId, @RequestBody @Valid Expense expense, BindingResult bindingResult){
         log.info("Request Received to update expense:"+expenseId);
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

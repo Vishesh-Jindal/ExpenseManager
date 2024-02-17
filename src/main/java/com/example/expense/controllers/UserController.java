@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 @Slf4j
@@ -18,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user, BindingResult bindingResult){
+    public ResponseEntity<User> addUser(@RequestBody @Valid User user, BindingResult bindingResult){
         log.info("Request Received for adding user:"+user.getUsername());
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -46,7 +48,7 @@ public class UserController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") int userId, @RequestBody User user, BindingResult bindingResult){
+    public ResponseEntity<User> updateUser(@PathVariable("id") int userId, @RequestBody @Valid User user, BindingResult bindingResult){
         log.info("Request Received to update user:"+userId);
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
