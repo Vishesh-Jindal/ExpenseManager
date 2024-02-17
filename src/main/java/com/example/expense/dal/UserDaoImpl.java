@@ -27,8 +27,9 @@ public class UserDaoImpl implements UserDao{
         if(oldUser.isPresent()){
             throw new RuntimeException();
         }
-        Integer incomeId = (Integer)session.save(user);
-        return session.get(User.class,incomeId);
+        Integer userId = (Integer)session.save(user);
+        User createdUser = this.getUser(userId);
+        return createdUser;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class UserDaoImpl implements UserDao{
 
         session.update(oldUser);
 
-        return session.get(User.class, userId);
+        return this.getUser(userId);
     }
     @Override
     public void deleteUser(int userId) {
