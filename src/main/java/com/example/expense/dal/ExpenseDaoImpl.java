@@ -1,5 +1,6 @@
 package com.example.expense.dal;
 
+import com.example.expense.constants.Constants;
 import com.example.expense.entities.Expense;
 import com.example.expense.entities.User;
 import com.example.expense.exceptions.NotFoundException;
@@ -49,5 +50,38 @@ public class ExpenseDaoImpl implements ExpenseDao{
             throw new NotFoundException();
         }
         session.delete(expense.get());
+    }
+
+    @Override
+    public double getTotalExpenseInYear(int userId, int year) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
+        if(!user.isPresent()){
+            throw new NotFoundException();
+        }
+        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_YEAR,Double.class).setParameter("value",year).getSingleResult();
+        return result;
+    }
+
+    @Override
+    public double getTotalExpenseInMonth(int userId, int month) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
+        if(!user.isPresent()){
+            throw new NotFoundException();
+        }
+        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_MONTH,Double.class).setParameter("value",month).getSingleResult();
+        return result;
+    }
+
+    @Override
+    public double getTotalExpense(int userId) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
+        if(!user.isPresent()){
+            throw new NotFoundException();
+        }
+        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE,Double.class).getSingleResult();
+        return result;
     }
 }

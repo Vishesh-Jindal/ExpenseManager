@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao{
     public User addUser(User user) {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> oldUser = Optional.ofNullable(
-                (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME, User.class).setParameter("value",user.getUsername()).uniqueResult()
+                session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME, User.class).setParameter("value",user.getUsername()).uniqueResult()
         );
         if(oldUser.isPresent()){
             throw new AlreadyExistsException();
