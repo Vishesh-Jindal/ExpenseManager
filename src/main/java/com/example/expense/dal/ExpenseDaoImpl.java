@@ -59,7 +59,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         if(!user.isPresent()){
             throw new NotFoundException();
         }
-        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_YEAR,Double.class).setParameter("value",year).getSingleResult();
+        Double result = Optional.ofNullable(session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_YEAR,Double.class).setParameter("year",year).setParameter("userId",userId).getSingleResult()).orElse(0.0);
         return result;
     }
 
@@ -70,7 +70,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         if(!user.isPresent()){
             throw new NotFoundException();
         }
-        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_MONTH,Double.class).setParameter("value",month).getSingleResult();
+        Double result = Optional.ofNullable(session.createQuery(Constants.QueryConstants.FETCH_EXPENSE_BY_MONTH,Double.class).setParameter("month",month).setParameter("userId",userId).getSingleResult()).orElse(0.0);
         return result;
     }
 
@@ -81,7 +81,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         if(!user.isPresent()){
             throw new NotFoundException();
         }
-        Double result = session.createQuery(Constants.QueryConstants.FETCH_EXPENSE,Double.class).getSingleResult();
+        Double result = Optional.ofNullable(session.createQuery(Constants.QueryConstants.FETCH_EXPENSE,Double.class).setParameter("userId",userId).getSingleResult()).orElse(0.0);
         return result;
     }
 }
