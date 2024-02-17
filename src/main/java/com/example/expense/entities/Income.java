@@ -8,6 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "income")
 public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
