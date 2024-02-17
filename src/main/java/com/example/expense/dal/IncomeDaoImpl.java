@@ -35,7 +35,7 @@ public class IncomeDaoImpl implements IncomeDao {
         oldIncome.get().setIncomeType(income.getIncomeType());
         oldIncome.get().setAmount(income.getAmount());
         oldIncome.get().setDescription(income.getDescription());
-        session.update(oldIncome);
+        session.update(oldIncome.get());
         return session.get(Income.class, incomeId);
     }
     @Override

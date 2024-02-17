@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao{
         oldUser.get().setEmail(user.getEmail());
         oldUser.get().setNickname(user.getNickname());
 
-        session.update(oldUser);
+        session.update(oldUser.get());
 
         return this.getUser(userId);
     }
@@ -73,6 +73,6 @@ public class UserDaoImpl implements UserDao{
         for(Expense expense:expenseSet){
             session.delete(expense);
         }
-        session.delete(oldUser);
+        session.delete(oldUser.get());
     }
 }

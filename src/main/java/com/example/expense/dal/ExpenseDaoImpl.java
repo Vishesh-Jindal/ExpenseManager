@@ -36,7 +36,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         oldExpense.get().setExpenseType(expense.getExpenseType());
         oldExpense.get().setAmount(expense.getAmount());
         oldExpense.get().setDescription(expense.getDescription());
-        session.update(oldExpense);
+        session.update(oldExpense.get());
         return session.get(Expense.class, expenseId);
     }
 
