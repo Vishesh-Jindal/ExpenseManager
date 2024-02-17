@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/CNExpenses?createDatabaseIfNotExist=true
-    username:
-    password:
+    url: jdbc:mysql://localhost:3306/Expenses?createDatabaseIfNotExist=true
+    username: root
+    password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    show-sql: true
     hibernate.ddl-auto: update
