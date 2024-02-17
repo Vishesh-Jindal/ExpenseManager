@@ -4,7 +4,6 @@ import com.example.expense.constants.Constants;
 import com.example.expense.entities.Expense;
 import com.example.expense.entities.Income;
 import com.example.expense.entities.User;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,7 +13,6 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-@Slf4j
 public class UserDaoImpl implements UserDao{
     @Autowired
     EntityManager entityManager;
