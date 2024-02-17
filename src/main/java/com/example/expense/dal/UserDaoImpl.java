@@ -1,6 +1,8 @@
 package com.example.expense.dal;
 
 import com.example.expense.constants.Constants;
+import com.example.expense.entities.Expense;
+import com.example.expense.entities.Income;
 import com.example.expense.entities.User;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -58,6 +61,14 @@ public class UserDaoImpl implements UserDao{
         Optional<User> oldUser = Optional.ofNullable(session.get(User.class,userId));
         if(!oldUser.isPresent()){
             throw new RuntimeException();
+        }
+        Set<Income> incomeSet = oldUser.get().getIncomeSet();
+        Set<Expense> expenseSet = oldUser.get().getExpenseSet();
+        for(Income income:incomeSet){
+            session.delete(income);
+        }
+        for(Expense expense:expenseSet){
+            session.delete(expense);
         }
         session.delete(oldUser);
     }
