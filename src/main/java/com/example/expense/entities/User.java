@@ -25,7 +25,8 @@ public class User {
     String address;
     @OneToMany(mappedBy = "user")
     Set<Expense> expenseSet = new HashSet<>(); // Needed if we want to delete user
-
+    @OneToMany(mappedBy = "user")
+    Set<Income> incomeSet = new HashSet<>(); // Needed if we want to delete user
     public int getId() {
         return id;
     }
@@ -81,7 +82,4 @@ public class User {
     public void setIncomeSet(Set<Income> incomeSet) {
         this.incomeSet = incomeSet;
     }
-
-    @OneToMany(mappedBy = "user")
-    Set<Income> incomeSet = new HashSet<>(); // Needed if we want to delete user
 }
