@@ -2,6 +2,7 @@ package com.example.expense.dal;
 
 import com.example.expense.entities.Income;
 import com.example.expense.entities.User;
+import com.example.expense.exceptions.NotFoundException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,7 @@ public class IncomeDaoImpl implements IncomeDao {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
         if(!user.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         income.setUser(user.get());
         Integer incomeId = (Integer)session.save(income);
@@ -29,7 +30,7 @@ public class IncomeDaoImpl implements IncomeDao {
         Session session = entityManager.unwrap(Session.class);
         Optional<Income> oldIncome = Optional.ofNullable(session.get(Income.class,incomeId));
         if(!oldIncome.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         oldIncome.get().setDate(income.getDate());
         oldIncome.get().setIncomeType(income.getIncomeType());
@@ -43,7 +44,7 @@ public class IncomeDaoImpl implements IncomeDao {
         Session session = entityManager.unwrap(Session.class);
         Optional<Income> income = Optional.ofNullable(session.get(Income.class,incomeId));
         if(!income.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         session.delete(income.get());
     }

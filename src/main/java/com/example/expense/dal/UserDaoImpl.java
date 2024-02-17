@@ -4,6 +4,8 @@ import com.example.expense.constants.Constants;
 import com.example.expense.entities.Expense;
 import com.example.expense.entities.Income;
 import com.example.expense.entities.User;
+import com.example.expense.exceptions.AlreadyExistsException;
+import com.example.expense.exceptions.NotFoundException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,7 +25,7 @@ public class UserDaoImpl implements UserDao{
                 (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME, User.class).setParameter("value",user.getUsername()).uniqueResult()
         );
         if(oldUser.isPresent()){
-            throw new RuntimeException();
+            throw new AlreadyExistsException();
         }
         Integer userId = (Integer)session.save(user);
         User createdUser = this.getUser(userId);
@@ -35,7 +37,7 @@ public class UserDaoImpl implements UserDao{
         Session session = entityManager.unwrap(Session.class);
         Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
         if(!user.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         return user.get();
     }
@@ -45,7 +47,7 @@ public class UserDaoImpl implements UserDao{
         Session session = entityManager.unwrap(Session.class);
         Optional<User> oldUser = Optional.ofNullable(session.get(User.class,userId));
         if(!oldUser.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         // if user name not same throw error
         oldUser.get().setAddress(user.getAddress());
@@ -61,7 +63,7 @@ public class UserDaoImpl implements UserDao{
         Session session = entityManager.unwrap(Session.class);
         Optional<User> oldUser = Optional.ofNullable(session.get(User.class,userId));
         if(!oldUser.isPresent()){
-            throw new RuntimeException();
+            throw new NotFoundException();
         }
         Set<Income> incomeSet = oldUser.get().getIncomeSet();
         Set<Expense> expenseSet = oldUser.get().getExpenseSet();
