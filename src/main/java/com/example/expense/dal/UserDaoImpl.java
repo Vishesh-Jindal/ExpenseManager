@@ -4,6 +4,7 @@ import com.example.expense.constants.Constants;
 import com.example.expense.entities.Expense;
 import com.example.expense.entities.Income;
 import com.example.expense.entities.User;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
+@Slf4j
 public class UserDaoImpl implements UserDao{
     @Autowired
     EntityManager entityManager;
@@ -20,7 +22,7 @@ public class UserDaoImpl implements UserDao{
     public User addUser(User user) {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> oldUser = Optional.ofNullable(
-                (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME).setParameter("value",user.getUsername()).uniqueResult()
+                (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME, User.class).setParameter("value",user.getUsername()).uniqueResult()
         );
         if(oldUser.isPresent()){
             throw new RuntimeException();
