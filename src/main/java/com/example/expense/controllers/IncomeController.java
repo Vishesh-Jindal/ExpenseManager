@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class IncomeController {
     @Autowired
     IncomeService incomeService;
-    @PostMapping("/{userId}")
+    @PostMapping("/user/{userId}")
     public ResponseEntity<Income> addIncome(@PathVariable("userId") int userId, @RequestBody Income income){
         Income createdIncome = incomeService.addIncome(userId, income);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);

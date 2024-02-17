@@ -13,7 +13,7 @@ public class ExpenseController {
     @Autowired
     ExpenseService expenseService;
 
-    @PostMapping("/{userId}")
+    @PostMapping("/user/{userId}")
     public ResponseEntity<Expense> addExpense(@PathVariable("userId") int userId, @RequestBody Expense expense){
         Expense createdExpense = expenseService.addExpense(userId, expense);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
