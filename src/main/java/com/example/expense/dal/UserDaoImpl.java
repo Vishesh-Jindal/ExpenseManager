@@ -17,20 +17,48 @@ public class UserDaoImpl implements UserDao{
     public User addUser(User user) {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> oldUser = Optional.ofNullable(
-                (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME).setParameter("value",user.getUsername()).getSingleResult()
+                (User) session.createQuery(Constants.QueryConstants.FETCH_BY_USERNAME).setParameter("value",user.getUsername()).uniqueResult()
         );
-        if(!oldUser.isPresent()){
+        if(oldUser.isPresent()){
             throw new RuntimeException();
         }
         Integer incomeId = (Integer)session.save(user);
         return session.get(User.class,incomeId);
     }
+
     @Override
-    public User updateUser(String userId, User user) {
-        return null;
+    public User getUser(int userId) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
+        if(!user.isPresent()){
+            throw new RuntimeException();
+        }
+        return user.get();
+    }
+
+    @Override
+    public User updateUser(int userId, User user) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> oldUser = Optional.ofNullable(session.get(User.class,userId));
+        if(!oldUser.isPresent()){
+            throw new RuntimeException();
+        }
+        // if user name not same throw error
+        oldUser.get().setAddress(user.getAddress());
+        oldUser.get().setEmail(user.getEmail());
+        oldUser.get().setNickname(user.getNickname());
+
+        session.update(oldUser);
+
+        return session.get(User.class, userId);
     }
     @Override
-    public void deleteUser(String userId) {
-
+    public void deleteUser(int userId) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<User> oldUser = Optional.ofNullable(session.get(User.class,userId));
+        if(!oldUser.isPresent()){
+            throw new RuntimeException();
+        }
+        session.delete(oldUser);
     }
 }

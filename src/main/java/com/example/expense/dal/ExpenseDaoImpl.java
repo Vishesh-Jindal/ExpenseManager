@@ -14,7 +14,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     @Autowired
     EntityManager entityManager;
     @Override
-    public Expense addExpense(String userId, Expense expense) {
+    public Expense addExpense(int userId, Expense expense) {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
         if(!user.isPresent()){
@@ -26,7 +26,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     }
 
     @Override
-    public Expense updateExpense(String expenseId, Expense expense) {
+    public Expense updateExpense(int expenseId, Expense expense) {
         Session session = entityManager.unwrap(Session.class);
         Optional<Expense> oldExpense = Optional.ofNullable(session.get(Expense.class,expenseId));
         if(!oldExpense.isPresent()){
@@ -41,7 +41,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     }
 
     @Override
-    public void deleteExpense(String expenseId) {
+    public void deleteExpense(int expenseId) {
         Session session = entityManager.unwrap(Session.class);
         Optional<Expense> expense = Optional.ofNullable(session.get(Expense.class,expenseId));
         if(!expense.isPresent()){

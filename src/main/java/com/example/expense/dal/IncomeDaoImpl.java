@@ -14,7 +14,7 @@ public class IncomeDaoImpl implements IncomeDao {
     @Autowired
     EntityManager entityManager;
     @Override
-    public Income addIncome(String userId, Income income) {
+    public Income addIncome(int userId, Income income) {
         Session session = entityManager.unwrap(Session.class);
         Optional<User> user = Optional.ofNullable(session.get(User.class,userId));
         if(!user.isPresent()){
@@ -25,7 +25,7 @@ public class IncomeDaoImpl implements IncomeDao {
         return session.get(Income.class,incomeId);
     }
     @Override
-    public Income updateIncome(String incomeId, Income income) {
+    public Income updateIncome(int incomeId, Income income) {
         Session session = entityManager.unwrap(Session.class);
         Optional<Income> oldIncome = Optional.ofNullable(session.get(Income.class,incomeId));
         if(!oldIncome.isPresent()){
@@ -39,7 +39,7 @@ public class IncomeDaoImpl implements IncomeDao {
         return session.get(Income.class, incomeId);
     }
     @Override
-    public void deleteIncome(String incomeId) {
+    public void deleteIncome(int incomeId) {
         Session session = entityManager.unwrap(Session.class);
         Optional<Income> income = Optional.ofNullable(session.get(Income.class,incomeId));
         if(!income.isPresent()){
