@@ -22,7 +22,7 @@ public class Income {
     LocalDate date;
     @Column(name = "description")
     String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     User user;
