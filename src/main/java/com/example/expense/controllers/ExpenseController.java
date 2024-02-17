@@ -61,4 +61,40 @@ public class ExpenseController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @GetMapping("/user/{userId}/{year}")
+    public ResponseEntity<Double> getNetExpensesByYear(@PathVariable("id") int userId, @PathVariable("year") int year){
+        log.info("Request Received to fetch net expense by year for user:"+userId+" year:"+year);
+        try{
+            Double expense = expenseService.getNetExpensesByYear(userId, year);
+            return ResponseEntity.status(HttpStatus.OK).body(expense);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/user/{userId}/{month}")
+    public ResponseEntity<Double> getNetExpensesByMonth(@PathVariable("id") int userId, @PathVariable("month") int month){
+        log.info("Request Received to fetch net expense by month for user:"+userId+" month:"+month);
+        try{
+            Double expense = expenseService.getNetExpensesByMonth(userId, month);
+            return ResponseEntity.status(HttpStatus.OK).body(expense);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Double> getNetExpenses(@PathVariable("id") int userId){
+        log.info("Request Received to fetch net expense till now for user:"+userId);
+        try{
+            Double expense = expenseService.getNetExpenses(userId);
+            return ResponseEntity.status(HttpStatus.OK).body(expense);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

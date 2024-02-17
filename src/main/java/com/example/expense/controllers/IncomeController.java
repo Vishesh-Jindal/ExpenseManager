@@ -60,4 +60,40 @@ public class IncomeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @GetMapping("/user/{userId}/{year}")
+    public ResponseEntity<Double> getNetIncomeByYear(@PathVariable("id") int userId, @PathVariable("year") int year){
+        log.info("Request Received to fetch net income by year for user:"+userId+" year:"+year);
+        try{
+            Double income = incomeService.getNetIncomeByYear(userId, year);
+            return ResponseEntity.status(HttpStatus.OK).body(income);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/user/{userId}/{month}")
+    public ResponseEntity<Double> getNetIncomeByMonth(@PathVariable("id") int userId, @PathVariable("month") int month){
+        log.info("Request Received to fetch net income by month for user:"+userId+" month:"+month);
+        try{
+            Double income = incomeService.getNetIncomeByMonth(userId, month);
+            return ResponseEntity.status(HttpStatus.OK).body(income);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Double> getNetIncome(@PathVariable("id") int userId){
+        log.info("Request Received to fetch net income till now for user:"+userId);
+        try{
+            Double income = incomeService.getNetIncome(userId);
+            return ResponseEntity.status(HttpStatus.OK).body(income);
+        }catch (NotFoundException notFoundException){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }catch (RuntimeException exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
