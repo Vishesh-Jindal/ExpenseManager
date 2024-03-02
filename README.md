@@ -18,3 +18,4 @@ The application should allow to:
 
 Flow Chart 
 
+![alt text](![image](https://github.com/Vishesh-Jindal/ExpenseManager/assets/84375861/1f351125-b10f-495b-b780-170cef256cc7))
